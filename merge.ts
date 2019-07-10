@@ -53,6 +53,17 @@ const mergeArray = (target: Array<any>, source: Array<any>): Array<any> => {
 }
 
 const mergeDeep = (target: object | Array<any>, source: object | Array<any>): object | Array<any> => {
+
+  if(target == null && source == null)
+    return null;
+
+  if(target == null)
+    return clone(source);
+
+  if(source == null)
+    return clone(target);
+
+
   if (isArray(source) && isArray(target)) {
     console.log('Merge Arrays');
     return mergeArray(target, source);
@@ -65,7 +76,7 @@ const mergeDeep = (target: object | Array<any>, source: object | Array<any>): ob
 }
 
 
-var target = { a: { b: { c: 'test', copy: 'yes' }, copy: true}, copy: true};
+var target = null; //{ a: { b: { c: 'test', copy: 'yes' }, copy: true}, copy: true};
 var source = { a: { b: { c: 'newvalue' }}};
 
 var merged = mergeDeep(target, source);
